@@ -4,9 +4,10 @@ $query = $_SERVER['QUERY_STRING'];
 $ope  = array();
 $buff = array();
 
+$pattern = '/[\+]|[\-]|[\*]|[\/]|[\(]|[\)]/';
+
 //convert RPN
 for($i = 0; $i < strlen($query); $i++) {
-    $pattern = '/[\+]|[\-]|[\*]|[\/]|[\(]|[\)]/';
     $data = $query[$i];
 
     if (is_numeric($data)) {
@@ -69,9 +70,8 @@ while(empty($ope) != 1){
 //calc
 $stack = array();
 for($i = 0; $i < count($buff); $i++) {
-    
-  $pattern = '/[\+]|[\-]|[\*]|[\/]|[\(]|[\)]/';
   $data = $buff[$i];
+    
   if (is_numeric($data)) {
         array_push($stack, $data);
   }elseif (preg_match($pattern, $data) == 1) {
